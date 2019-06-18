@@ -34,10 +34,10 @@ public class HelloController {
 	String account =  request.getParameter("account");
 	String password =  request.getParameter("password"); 
 	  
-    Member member = memberService.getMember(account,password);
-    String  Email = member.getMemberEmail();
+   // Member member = memberService.getMember(account,password);
+    //String  Email = member.getMemberEmail();
   
-    System.out.println(Email);
+   // System.out.println(Email);
     
     return "Login";
   }
@@ -51,10 +51,31 @@ public class HelloController {
 	public ModelAndView displayAllUser() {
 		System.out.println("User Page Requested : All Users");
 		ModelAndView mv = new ModelAndView();
-		//List<User> userList = userService.getAllUsers();
-		//mv.addObject("userList", userList);
+		List<Member> userList = memberService.getAllUser();
+		mv.addObject("userList", userList);
 		mv.setView(new RedirectView("/ssh02", false));
 		return mv;
 	}
+  @RequestMapping(value = "/backhome", method = RequestMethod.GET)
+	public RedirectView  indexView() {
+		System.out.println("GO backhome Page!");
+		return new RedirectView("/ssh02", false);
+	}
+  @RequestMapping(value = "/forgetpwd", method = RequestMethod.GET)
+	public String  forgetpwd() {
+	  	Member member = memberService.getMail(1);
+	  	System.out.println(member.getMemberName());
+	    System.out.println(member.getRegisterTime());
+		System.out.println("GO ForgetPWD Page!");
+		return "ForgetPWD";
+	}
+  @RequestMapping(value = "/alluser", method = RequestMethod.GET)
+	public String  alluser(Model model) {
+	  	model.addAttribute("user",new Member());
+		model.addAttribute("userList",memberService.getAllUser());
+		System.out.println("GO alluser Page!");
+		return "allUsers";
+	}
+  
 
 }

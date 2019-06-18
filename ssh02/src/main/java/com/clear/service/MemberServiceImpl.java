@@ -1,5 +1,8 @@
 package com.clear.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,14 +18,23 @@ public class MemberServiceImpl implements MemberService {
   
   @Transactional
   @Override
-  public Member getMember(String account, String password) {
-    return memberDao.getMember(account,password);
+  public Member getMember(String account, String password) throws Exception {
+    //
+	  if(true) {
+		  throw new Exception();
+	  }
+	  
+	  return memberDao.getMember(account,password);
   }
 
   @Override
   public Member getMail(Integer memberId) {
-	// TODO Auto-generated method stub
-	return null;
+	  return memberDao.getMail(memberId);
+  }
+  
+  @Override
+  public List<Member> getAllUser() {
+	  return this.memberDao.getAllUser();
   }
   
 

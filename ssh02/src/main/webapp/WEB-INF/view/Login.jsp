@@ -9,12 +9,7 @@
 <body>
 		<form>
 		 登入成功<br>
-		 <input type="button" name="subm" value="返回登入頁面" onclick="backLogin()">
-			<script language="javascript">
-			function backLogin(){
-				  window.history.back();
-			}
-			</script>
+		 <a href="backhome"><input type="button" name="subm" value="返回登入頁面" onclick="backLogin()"></a>
 		</form>
 	</body>
 </html>
