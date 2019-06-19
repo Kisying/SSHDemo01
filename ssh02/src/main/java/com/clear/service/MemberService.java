@@ -8,4 +8,5 @@ public interface MemberService {
 	public Member getMember(String account, String password) throws Exception;
 	public Member getMail(Integer memberId);
 	public List<Member> getAllUser();
+	public boolean saveUser(Member user);
 }

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,12 +50,24 @@ public class HelloController {
 	}
   
   @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public ModelAndView displayAllUser() {
-		System.out.println("User Page Requested : All Users");
-		ModelAndView mv = new ModelAndView();
-		List<Member> userList = memberService.getAllUser();
-		mv.addObject("userList", userList);
-		mv.setView(new RedirectView("/ssh02", false));
+	public ModelAndView addUser(@ModelAttribute Member Member, BindingResult result) {
+		ModelAndView mv = new ModelAndView("allUsers");
+		
+		if (result.hasErrors()) {
+			List<ObjectError> errorList = result.getAllErrors();
+            for (ObjectError error : errorList) {
+                System.out.println(error.getDefaultMessage());
+            }
+			return new ModelAndView("Register");
+			
+		}
+		boolean isAdded = memberService.saveUser(Member);
+		if (isAdded) {
+			mv.addObject("message", "New user successfully added");
+		} else {
+			return new ModelAndView("Register");
+		}
+
 		return mv;
 	}
   @RequestMapping(value = "/backhome", method = RequestMethod.GET)

@@ -37,6 +37,9 @@ public class Member {
   @Column(name="UPDATE_TIME")
   private Timestamp updateTime;
   
+  @Column(name="ADDRESS")
+  private String address;
+  
   public Member() {}
 
   
@@ -96,5 +99,12 @@ public class Member {
     this.updateTime = updateTime;
   }
   
+  public String getAddress() {
+	 return address;
+  }
+
+  public void setAddress(String address) {
+	  this.address = address;
+  }
 
 }

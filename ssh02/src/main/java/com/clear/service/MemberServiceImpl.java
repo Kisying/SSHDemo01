@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.clear.dao.MemberDao;
 import com.clear.model.Member;
 
+
 @Service("memberService")
 public class MemberServiceImpl implements MemberService {
 
@@ -36,6 +37,15 @@ public class MemberServiceImpl implements MemberService {
   public List<Member> getAllUser() {
 	  return this.memberDao.getAllUser();
   }
+  @Override
+	public boolean saveUser(Member user) {
+		try {
+			memberDao.save(user);
+			return true;
+		}catch(Exception ex) {
+			return false;
+		}
+	}
   
 
 }

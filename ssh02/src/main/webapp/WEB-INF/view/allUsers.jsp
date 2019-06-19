@@ -20,9 +20,10 @@
 	<table border="1px" cellpadding="0" cellspacing="0">
 		<thead>
 			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>UserName</th>
+				<th>名子</th>
+				<th>信箱</th>
+				<th>密碼</th>
+				<th>地址</th>
 				<th>Edit</th>
 				<th>Delete</th>
 			</tr>
@@ -31,13 +32,14 @@
 		<tbody>
 			<c:forEach items="${userList}" var="user">
 				<tr>
-					<td>${user.MEMBER_NAME}</td>
-					<td>${user.MEMBER_NAME}</td>
-					<td>${user.MEMBER_NAME}</td>
+					<td>${user.memberName}</td>
+					<td>${user.memberEmail}</td>
+					<td>${user.password}</td>
+					<td>${user.address}</td>
 					<td><a
-						href="${pageContext.request.contextPath}/editUser/${user.MEMBER_ID}">Edit</a></td>
+						href="${pageContext.request.contextPath}/editUser/${user.memberId}">Edit</a></td>
 					<td><a
-						href="${pageContext.request.contextPath}/deleteUser/${user.MEMBER_ID}">Delete</a></td>
+						href="${pageContext.request.contextPath}/deleteUser/${user.memberId}">Delete</a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

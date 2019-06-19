@@ -1,5 +1,6 @@
 package com.clear.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -25,19 +26,23 @@ public class MemberDaoImpl implements MemberDao {
   public Member getMail(Integer memberId) {
     return sessionFactory.openSession().get(Member.class, memberId);
   }
-  
   @Override
   public List<Member> getAllUser() {
 		Session session = sessionFactory.openSession();
-		Query<List<Member>> q = session.createQuery("from MEMBER");
-		//List<Member> personsList = session.createQuery("from MEMBER").list();
+		
+		List<Member> personsList = session.createQuery("from Member").list();
 		
 		/*
 		for(Member p : personsList){
 			logger.info("Person List::"+p);
 		}
 		*/
-		return null;
+		return personsList;
 	}
+  @Override
+  public Serializable save(Member o) {
+
+      return sessionFactory.openSession().save(o);
+  }
 
 }
