@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.clear.model.MailMail;
 import com.clear.model.Member;
 import com.clear.service.MemberService;
 
@@ -30,17 +33,11 @@ public class HelloController {
   private MemberService memberService;
 
   @RequestMapping(value="/login",method = RequestMethod.POST) //前端
-  public String Login(HttpServletRequest request) {
-	System.out.println(request.getParameter("account"));
-	System.out.println(request.getParameter("password"));
-	String account =  request.getParameter("account");
-	String password =  request.getParameter("password"); 
+  public String Login(@ModelAttribute Member Member) {
 	  
-   // Member member = memberService.getMember(account,password);
-    //String  Email = member.getMemberEmail();
-  
-   // System.out.println(Email);
-    
+    Member member = memberService.getMember(Member);
+    if(member == null)return "redirect:/";
+
     return "Login";
   }
   @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -51,15 +48,14 @@ public class HelloController {
   
   @RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public ModelAndView addUser(@ModelAttribute Member Member, BindingResult result) {
-		ModelAndView mv = new ModelAndView("allUsers");
+		ModelAndView mv = new ModelAndView("redirect:/");
 		
 		if (result.hasErrors()) {
 			List<ObjectError> errorList = result.getAllErrors();
             for (ObjectError error : errorList) {
                 System.out.println(error.getDefaultMessage());
             }
-			return new ModelAndView("Register");
-			
+			return new ModelAndView("Register");	
 		}
 		boolean isAdded = memberService.saveUser(Member);
 		if (isAdded) {
@@ -77,10 +73,6 @@ public class HelloController {
 	}
   @RequestMapping(value = "/forgetpwd", method = RequestMethod.GET)
 	public String  forgetpwd() {
-	  	Member member = memberService.getMail(1);
-	  	System.out.println(member.getMemberName());
-	    System.out.println(member.getRegisterTime());
-		System.out.println("GO ForgetPWD Page!");
 		return "ForgetPWD";
 	}
   @RequestMapping(value = "/alluser", method = RequestMethod.GET)
@@ -89,6 +81,17 @@ public class HelloController {
 		model.addAttribute("userList",memberService.getAllUser());
 		System.out.println("GO alluser Page!");
 		return "allUsers";
+	}
+  @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+	public String  sendMail(@ModelAttribute Member Member) {
+	  
+	  ApplicationContext context = new ClassPathXmlApplicationContext("spring-Mail.xml");
+	  MailMail mm = (MailMail) context.getBean("mailMail");
+	  mm.sendMail("Test@gmail.com",
+			  Member.getMemberEmail(),
+	    		   "忘記密碼信件", 
+	    		   "Testing only \n\n 這是信件測試");
+		return "error";
 	}
   
 

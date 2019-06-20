@@ -6,9 +6,9 @@ import java.util.List;
 import com.clear.model.Member;
 
 public interface MemberDao {
-	 Member getMember(String account, String password);
+	 Member getMember(Member Member);
 	 Member getMail(Integer memberId);
 	 List<Member>getAllUser();
-	 public Serializable save(Member o);
+	 void save(Member Member);
 
 }

@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -17,6 +19,7 @@ public class Member {
   
   @Id
   @Column(name="MEMBER_ID")
+  @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Integer memberId;
   
   @Column(name="MEMBER_EMAIL", length=100, nullable=false)

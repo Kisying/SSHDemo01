@@ -1,4 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,18 +9,16 @@
 </script>
 </head>
 <body>
-<form:form method="POST" action="/spring-mvc-java/addEmployee"
-  modelAttribute="employee">
-    <form:label path="name">Name</form:label>
-    <form:input path="name" />
-     
-    <form:label path="id">Id</form:label>
-    <form:input path="id" />
-     
-    <input type="submit" value="Submit" />
-</form:form>
-<div id="div1"><h2></h2></div>
-<button>get</button>
+	<form method="POST" action="sendMail">
+		<table width="100" border="1">
+			<tr>
+				<td>信箱: <input type="text" id="memberEmail" name="memberEmail"
+					placeholder="使用者信箱" />
+				</td>
+			</tr>
+		</table>
+		<input type="submit" id="find" name="find" value="發送Mail" />
+	</form>
 
 </body>
 </html>

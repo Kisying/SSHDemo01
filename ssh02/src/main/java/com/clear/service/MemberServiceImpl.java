@@ -19,13 +19,8 @@ public class MemberServiceImpl implements MemberService {
   
   @Transactional
   @Override
-  public Member getMember(String account, String password) throws Exception {
-    //
-	  if(true) {
-		  throw new Exception();
-	  }
-	  
-	  return memberDao.getMember(account,password);
+  public Member getMember(Member user) {
+	  return memberDao.getMember(user);
   }
 
   @Override
@@ -38,13 +33,19 @@ public class MemberServiceImpl implements MemberService {
 	  return this.memberDao.getAllUser();
   }
   @Override
-	public boolean saveUser(Member user) {
+	public boolean saveUser(Member user){
 		try {
+			java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(System.currentTimeMillis());
+			user.setRegisterTime(sqlTimestamp);
 			memberDao.save(user);
-			return true;
+		//	if(true) {
+		//		  throw new Exception();
+		//	}
+			return true;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 		}catch(Exception ex) {
 			return false;
 		}
+		
 	}
   
 

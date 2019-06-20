@@ -12,14 +12,13 @@ type="text/javascript"></script>
 	<body>
 	
 		<form method="POST" action="login">
-		帳號:<input type = "text" id = "account" name = "account" placeholder = "請輸入帳號"/><br>
+		帳號:<input type = "text" id = "memberName" name = "memberName" placeholder = "請輸入帳號"/><br>
 		密碼:<input type = "text" id = "password" name = "password" placeholder = "請輸入密碼"/><br>
 		<input type="submit" id = "login" name="login" value="登入" />
 		<a href="register"><input type="button" id = "register" name="register" value="註冊" ></a>
 		<a href="forgetpwd"><input type="button" id = "forgetpwd" name="forgetpwd" value="忘記密碼" ></a>
 		<a href="alluser"><input type="button" id = "alluser" name="alluser" value="會員資料" ></a>
 		</form>
-		<div name = "message" id="message"></div>
 		
 	</body>
 </html>
