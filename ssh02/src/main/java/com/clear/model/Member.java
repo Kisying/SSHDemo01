@@ -13,101 +13,100 @@ import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="MEMBER",
-  uniqueConstraints = {@UniqueConstraint(columnNames={"MEMBER_ID"})})
+@Table(name = "MEMBER", uniqueConstraints = { @UniqueConstraint(columnNames = { "MEMBER_ID" }) })
 public class Member {
-  
-  @Id
-  @Column(name="MEMBER_ID")
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
-  private Integer memberId;
-  
-  @Column(name="MEMBER_EMAIL", length=100, nullable=false)
-  private String memberEmail;
-  
-  @Column(name="MEMBER_NAME", length=30)
-  private String memberName;
-  
-  @Column(name="PASSWORD", length=64, nullable=false)
-  private String password;
-  
-  @Column(name="REGISTER_TIME")
-  private Timestamp registerTime;
 
-  @Column(name="LOGIN_TIME")
-  private Timestamp loginTime;
-  
-  @Column(name="UPDATE_TIME")
-  private Timestamp updateTime;
-  
-  @Column(name="ADDRESS")
-  private String address;
-  
-  public Member() {}
+	@Id
+	@Column(name = "MEMBER_ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer memberId;
 
-  
-  public Integer getMemberId() {
-    return memberId;
-  }
+	@Column(name = "MEMBER_EMAIL", length = 100, nullable = false)
+	private String memberEmail;
 
-  public void setMemberId(Integer memberId) {
-    this.memberId = memberId;
-  }
+	@Column(name = "MEMBER_NAME", length = 30)
+	private String memberName;
 
-  public String getMemberEmail() {
-    return memberEmail;
-  }
+	@Column(name = "PASSWORD", length = 64, nullable = false)
+	private String password;
 
-  public void setMemberEmail(String memberEmail) {
-    this.memberEmail = memberEmail;
-  }
+	@Column(name = "REGISTER_TIME")
+	private Timestamp registerTime;
 
-  public String getMemberName() {
-    return memberName;
-  }
+	@Column(name = "LOGIN_TIME")
+	private Timestamp loginTime;
 
-  public void setMemberName(String memberName) {
-    this.memberName = memberName;
-  }
+	@Column(name = "UPDATE_TIME")
+	private Timestamp updateTime;
 
-  public String getPassword() {
-    return password;
-  }
+	@Column(name = "ADDRESS")
+	private String address;
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	public Member() {
+	}
 
-  public Timestamp getRegisterTime() {
-    return registerTime;
-  }
+	public Integer getMemberId() {
+		return memberId;
+	}
 
-  public void setRegisterTime(Timestamp registerTime) {
-    this.registerTime = registerTime;
-  }
+	public void setMemberId(Integer memberId) {
+		this.memberId = memberId;
+	}
 
-  public Timestamp getLoginTime() {
-    return loginTime;
-  }
+	public String getMemberEmail() {
+		return memberEmail;
+	}
 
-  public void setLoginTime(Timestamp loginTime) {
-    this.loginTime = loginTime;
-  }
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
+	}
 
-  public Timestamp getUpdateTime() {
-    return updateTime;
-  }
+	public String getMemberName() {
+		return memberName;
+	}
 
-  public void setUpdateTime(Timestamp updateTime) {
-    this.updateTime = updateTime;
-  }
-  
-  public String getAddress() {
-	 return address;
-  }
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 
-  public void setAddress(String address) {
-	  this.address = address;
-  }
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Timestamp getRegisterTime() {
+		return registerTime;
+	}
+
+	public void setRegisterTime(Timestamp registerTime) {
+		this.registerTime = registerTime;
+	}
+
+	public Timestamp getLoginTime() {
+		return loginTime;
+	}
+
+	public void setLoginTime(Timestamp loginTime) {
+		this.loginTime = loginTime;
+	}
+
+	public Timestamp getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 }

@@ -24,38 +24,38 @@ import com.clear.model.MailMail;
 import com.clear.model.Member;
 import com.clear.service.MemberService;
 
-
-
 @Controller
 public class HelloController {
-  
-  @Autowired
-  private MemberService memberService;
 
-  @RequestMapping(value="/login",method = RequestMethod.POST) //前端
-  public String Login(@ModelAttribute Member Member) {
-	  
-    Member member = memberService.getMember(Member);
-    if(member == null)return "redirect:/";
+	@Autowired
+	private MemberService memberService;
 
-    return "Login";
-  }
-  @RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String  RegisterView() {
+	@RequestMapping(value = "/login", method = RequestMethod.POST) // 前端
+	public String Login(@ModelAttribute Member Member) {
+
+		Member member = memberService.getMember(Member);
+		if (member == null)
+			return "redirect:/";
+
+		return "Login";
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String RegisterView() {
 		System.out.println("GO Register Page!");
 		return "Register";
 	}
-  
-  @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public ModelAndView addUser(@ModelAttribute Member Member, BindingResult result) {
 		ModelAndView mv = new ModelAndView("redirect:/");
-		
+
 		if (result.hasErrors()) {
 			List<ObjectError> errorList = result.getAllErrors();
-            for (ObjectError error : errorList) {
-                System.out.println(error.getDefaultMessage());
-            }
-			return new ModelAndView("Register");	
+			for (ObjectError error : errorList) {
+				System.out.println(error.getDefaultMessage());
+			}
+			return new ModelAndView("Register");
 		}
 		boolean isAdded = memberService.saveUser(Member);
 		if (isAdded) {
@@ -66,33 +66,33 @@ public class HelloController {
 
 		return mv;
 	}
-  @RequestMapping(value = "/backhome", method = RequestMethod.GET)
-	public RedirectView  indexView() {
+
+	@RequestMapping(value = "/backhome", method = RequestMethod.GET)
+	public RedirectView indexView() {
 		System.out.println("GO backhome Page!");
 		return new RedirectView("/ssh02", false);
 	}
-  @RequestMapping(value = "/forgetpwd", method = RequestMethod.GET)
-	public String  forgetpwd() {
+
+	@RequestMapping(value = "/forgetpwd", method = RequestMethod.GET)
+	public String forgetpwd() {
 		return "ForgetPWD";
 	}
-  @RequestMapping(value = "/alluser", method = RequestMethod.GET)
-	public String  alluser(Model model) {
-	  	model.addAttribute("user",new Member());
-		model.addAttribute("userList",memberService.getAllUser());
+
+	@RequestMapping(value = "/alluser", method = RequestMethod.GET)
+	public String alluser(Model model) {
+		model.addAttribute("user", new Member());
+		model.addAttribute("userList", memberService.getAllUser());
 		System.out.println("GO alluser Page!");
 		return "allUsers";
 	}
-  @RequestMapping(value = "/sendMail", method = RequestMethod.POST)
-	public String  sendMail(@ModelAttribute Member Member) {
-	  
-	  ApplicationContext context = new ClassPathXmlApplicationContext("spring-Mail.xml");
-	  MailMail mm = (MailMail) context.getBean("mailMail");
-	  mm.sendMail("Test@gmail.com",
-			  Member.getMemberEmail(),
-	    		   "忘記密碼信件", 
-	    		   "Testing only \n\n 這是信件測試");
+
+	@RequestMapping(value = "/sendMail", method = RequestMethod.POST)
+	public String sendMail(@ModelAttribute Member Member) {
+		if (memberService.sendMail(Member)) {
+			return "success";
+		}
 		return "error";
+
 	}
-  
 
 }

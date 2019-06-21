@@ -5,7 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <title>註冊畫面</title>
 <script src="//code.jquery.com/jquery-1.10.2.js"
 type="text/javascript"></script>
@@ -32,7 +32,7 @@ type="text/javascript"></script>
                     <td><form:input path="address"/></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Submit"/></td>
+                    <td><input type="submit" value="送出"/></td>
                 </tr>
             </table>
         </form:form>
